@@ -1,5 +1,6 @@
 const gameboard = {
-    
+    winsX: 0,
+    winsO: 0, 
     board: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
     winningCombos: [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -65,6 +66,12 @@ const gameboard = {
     },
     displayWinMessage: function displayWinMessage(currentPlayer) {
         console.log("Player " + currentPlayer + " wins!");
+        if (currentPlayer === 'X') {
+            this.winsX++;
+        } else {
+            this.winsO++;
+        }
+        this.checkSeriesWinner();
     },
     displayTieMessage: function displayTieMessage() {
         console.log("The Game is a Tie");
@@ -73,6 +80,23 @@ const gameboard = {
         this.displayBoard();
         this.addEvents();
         return
+    },
+    checkSeriesWinner: function() {
+        if (this.winsX === 3) {
+            console.log("Player X wins the series!");
+            // Handle series completion
+        } else if (this.winsO === 3) {
+            console.log("Player O wins the series!");
+            // Handle series completion
+        } else {
+            this.resetBoardForNextGame();
+        }
+    },
+    resetBoardForNextGame: function() {
+        this.board = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        this.currentPlayer = 'X'; // or choose based on some rule
+        this.displayBoard();
+        this.addEvents();
     }
 }
 
