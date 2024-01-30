@@ -9,6 +9,8 @@ const gameboard = {
     ],
     currentPlayer: 'X',
     winmsg: document.querySelector('.winmsg'),
+    xscore: document.querySelector('.xscore'),
+    oscore: document.querySelector('.oscore'),
     displayBoard: function () {
         const container = document.querySelector('#container');
         if(!container) {
@@ -69,13 +71,20 @@ const gameboard = {
         console.log("Player " + currentPlayer + " wins!");
         if (currentPlayer === 'X') {
             this.winsX++;
+            this.xscore.textContent = this.winsX;
         } else {
             this.winsO++;
+            this.oscore.textContent = this.winsO;
         }
         this.checkSeriesWinner();
     },
     displayTieMessage: function displayTieMessage() {
         console.log("The Game is a Tie");
+        this.winmsg.innerHTML = "The Game is a Tie";
+
+        setTimeout(() => {
+            this.resetBoardForNextGame();
+        }, 3000);
     },
     startGame: function () {
         this.displayBoard();
@@ -92,12 +101,17 @@ const gameboard = {
             this.winmsg.innerHTML = "Player O wins the Series!"
             // Handle series completion
         } else {
-            this.resetBoardForNextGame();
+
+            setTimeout(() => {
+                this.resetBoardForNextGame();    
+            }, 3000);
+            
         }
     },
     resetBoardForNextGame: function() {
         this.board = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
         this.currentPlayer = 'X'; // or choose based on some rule
+        this.winmsg.textContent = ' ';
         this.displayBoard();
         this.addEvents();
     }
