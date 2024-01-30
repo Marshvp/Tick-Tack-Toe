@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+* {
+    font-family: Raleway, sans-serif;
+}
+
+.container {
+    display: grid;
+    padding-left: 20%;
+    padding-right: 20%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    
+}
+
+.cell {
+    align-self: center;
+    border: 1px solid black;
+    font-size: 32px;
+}

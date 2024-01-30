@@ -8,6 +8,7 @@ const gameboard = {
         [0, 4, 8], [2, 4, 6]              
     ],
     currentPlayer: 'X',
+    winmsg: document.querySelector('.winmsg'),
     displayBoard: function () {
         const container = document.querySelector('#container');
         if(!container) {
@@ -84,9 +85,11 @@ const gameboard = {
     checkSeriesWinner: function() {
         if (this.winsX === 3) {
             console.log("Player X wins the series!");
+            this.winmsg.innerHTML = "Player X wins the Series!"
             // Handle series completion
         } else if (this.winsO === 3) {
             console.log("Player O wins the series!");
+            this.winmsg.innerHTML = "Player O wins the Series!"
             // Handle series completion
         } else {
             this.resetBoardForNextGame();
