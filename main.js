@@ -86,10 +86,30 @@ const gameboard = {
             this.resetBoardForNextGame();
         }, 3000);
     },
+    init: function() {
+        const startButton = document.querySelector('#startGameButton');
+        const restartButton = document.querySelector('#restartGameButton');
+    
+        startButton.addEventListener('click', () => {
+            this.startGame();
+        });
+    
+        restartButton.addEventListener('click', () => {
+            this.restartSeries();
+        });
+        this.winmsg.textContent = '';
+    },
     startGame: function () {
         this.displayBoard();
         this.addEvents();
         return
+    },
+    restartSeries: function() {
+        this.winsX = 0;
+        this.winsO = 0;
+        this.xscore.textContent = 0;
+        this.oscore.textContent = 0;
+        this.resetBoardForNextGame();
     },
     checkSeriesWinner: function() {
         if (this.winsX === 3) {
@@ -110,11 +130,11 @@ const gameboard = {
     },
     resetBoardForNextGame: function() {
         this.board = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        this.currentPlayer = 'X'; // or choose based on some rule
+        this.currentPlayer = 'X'; 
         this.winmsg.textContent = ' ';
         this.displayBoard();
         this.addEvents();
     }
 }
 
-gameboard.startGame()
+gameboard.init()
